@@ -1,8 +1,16 @@
+"use client";
+import { CocktailDetailed } from "@/app/api/cocktailsApi";
+import { useCocktail } from "@/app/hooks/useCocktail";
+
 export default function Drink({ params }: { params: { slug: string } }) {
   const drinkName = params.slug.toLowerCase();
 
   console.log(params.slug);
   /* if (drinkName.includes(" ")) */
+  const cocktail = useCocktail();
+  let drink: CocktailDetailed | undefined = cocktail?.drinks[0];
+
+  drink && console.log(drink.strDrink);
   return (
     <>
       <p>{drinkName}</p>

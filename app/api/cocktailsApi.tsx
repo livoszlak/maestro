@@ -24,7 +24,7 @@ export type CocktailDetailed = {
   strInstructions: string;
   strDrinkThumb: string;
   strIngredient1: string;
-  strIngredient2: string | null;
+  strIngredient2: string;
   strIngredient3: string | null;
   strIngredient4: string | null;
   strIngredient5: string | null;
