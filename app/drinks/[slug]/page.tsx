@@ -1,6 +1,7 @@
-export default function Drink({ params }) {
+export default function Drink({ params }: { params: { slug: string } }) {
   const drinkName = params.slug.toLowerCase();
 
+  console.log(params.slug);
   /* if (drinkName.includes(" ")) */
   return (
     <>
