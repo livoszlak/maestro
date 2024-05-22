@@ -11,6 +11,10 @@ export type Drinks = {
   drinks: Cocktail[];
 };
 
+export type Drink = {
+  drinks: CocktailDetailed[];
+};
+
 export type CocktailDetailed = {
   idDrink: string;
   strDrink: string;
@@ -51,13 +55,13 @@ export type CocktailDetailed = {
   strMeasure15: string | null;
 };
 
-export async function fetchCocks(): Promise<Drinks> {
+export async function fetchCocktails(): Promise<Drinks> {
   const response = await fetch(baseUrl + `filter.php?i=${ingredient}`);
   const data = await response.json();
   return data;
 }
 
-export async function fetchDrinkDetails(): Promise<CocktailDetailed> {
+export async function fetchCocktail(): Promise<Drink> {
   const response = await fetch(baseUrl + `lookup.php?i=${DrinkID}`);
   const data = await response.json();
   return data;
