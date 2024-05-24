@@ -1,6 +1,7 @@
 "use client";
 import { useCocktail } from "@/app/hooks/useCocktail";
 import { Box, styled } from "@mui/material";
+import { Theme } from "@mui/material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",

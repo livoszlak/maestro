@@ -99,7 +99,12 @@ const formatCocktail = (cocktail: DetailedResponse): CocktailDetails => {
     const ingredientKey = `strIngredient${i}` as IngredientKey;
     const measureKey = `strMeasure${i}` as MeasureKey;
 
-    if (cocktail[ingredientKey] && cocktail[measureKey]) {
+    if (
+      cocktail[ingredientKey] &&
+      cocktail[measureKey] &&
+      cocktail[ingredientKey] !== "null" &&
+      cocktail[measureKey] !== "null"
+    ) {
       ingredients.push({
         measure: cocktail[measureKey],
         ingredient: cocktail[ingredientKey],
