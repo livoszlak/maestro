@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchCocktails, Cocktail, Drinks } from "../api/cocktailsApi";
+import { fetchCocktails, Drinks } from "../api/cocktailsApi";
 
 export const useCocktails = () => {
   const [cocktails, setCocktails] = useState<Drinks>();

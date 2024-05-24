@@ -2,14 +2,14 @@
 import { DetailedResponse } from "@/app/api/cocktailsApi";
 import { useCocktail } from "@/app/hooks/useCocktail";
 import { useState } from "react";
+import CocktailDisplay from "@/app/components/CocktailDisplay/CocktailDisplay";
 
 export default function Drink({ params }: { params: { slug: string } }) {
-  const [drinkId, setDrinkId] = useState(params.slug);
+  const cocktail = useCocktail(params.slug);
 
-  console.log(params.slug);
-  /* if (drinkName.includes(" ")) */
-  const cocktail = useCocktail(drinkId);
-  console.log(cocktail);
-
-  return <></>;
+  return (
+    <>
+      <CocktailDisplay slug={params.slug} />
+    </>
+  );
 }
