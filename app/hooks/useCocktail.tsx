@@ -13,7 +13,6 @@ export const useCocktail = (id: string) => {
   useEffect(() => {
     const getCocktail = async () => {
       const cocktailFromApi = await fetchCocktail(id);
-      console.log(cocktailFromApi);
       setCocktail(cocktailFromApi);
     };
 
