@@ -1,17 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchCocktail, Cocktail, Drink } from "../api/cocktailsApi";
+import {
+  fetchCocktail,
+  Cocktail,
+  Drink,
+  CocktailDetails,
+} from "../api/cocktailsApi";
 
 export const useCocktail = () => {
-  const [cocktail, setCocktail] = useState<Drink>();
+  const [cocktail, setCocktail] = useState<CocktailDetails>();
 
   useEffect(() => {
-    const getCocktail = async () => {
-      const cocktailFromApi = await fetchCocktail();
+    const getCocktail = async (drinkId: string) => {
+      const cocktailFromApi = await fetchCocktail(drinkId);
       setCocktail(cocktailFromApi);
     };
 
-    getCocktail();
+    getCocktail(drinkId);
   }, []);
   return cocktail;
 };
