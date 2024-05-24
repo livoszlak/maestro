@@ -1,6 +1,6 @@
 "use client";
 
-import { Cocktail, CocktailDetails } from "@/app/api/cocktailsApi";
+import { Cocktail } from "@/app/api/cocktailsApi";
 import {
   Card,
   CardMedia,
@@ -15,7 +15,7 @@ const StyledCard = styled(Card)({
   width: "100%",
 });
 
-export default function CocktailCard(cocktail: Cocktail) {
+export default function CocktailCard(cocktail: Cocktail): JSX.Element {
   return (
     <StyledCard sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -29,7 +29,6 @@ export default function CocktailCard(cocktail: Cocktail) {
         </Typography>
       </CardContent>
       <CardActions>
-        {/* TODO: add link to slug page with id of clicked cocktail */}
         <Button size="small">Learn More</Button>
       </CardActions>
     </StyledCard>
