@@ -1,21 +1,39 @@
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 const ingredient: string = "Whiskey";
-const DrinkID: string = "15300";
+const drinkID: string = "15300";
 
 export type Cocktail = {
   strDrink: string;
   strDrinkThumb: string;
   idDrink: string;
 };
+
 export type Drinks = {
   drinks: Cocktail[];
 };
 
 export type Drink = {
-  drinks: CocktailDetailed[];
+  drinks: DetailedResponse[];
 };
 
-export type CocktailDetailed = {
+export type IngredientMeasurePair = {
+  measure: string;
+  ingredient: string;
+};
+
+export type IngredientMeasures = IngredientMeasurePair[];
+
+export type CocktailDetails = {
+  id: string;
+  name: string;
+  type: string;
+  glass: string;
+  instructions: string;
+  image: string;
+  ingredients: IngredientMeasures;
+};
+
+export type DetailedResponse = {
   idDrink: string;
   strDrink: string;
   strCategory: string;
@@ -24,7 +42,7 @@ export type CocktailDetailed = {
   strInstructions: string;
   strDrinkThumb: string;
   strIngredient1: string;
-  strIngredient2: string;
+  strIngredient2: string | null;
   strIngredient3: string | null;
   strIngredient4: string | null;
   strIngredient5: string | null;
@@ -57,12 +75,39 @@ export type CocktailDetailed = {
 
 export async function fetchCocktails(): Promise<Drinks> {
   const response = await fetch(baseUrl + `filter.php?i=${ingredient}`);
-  const data = await response.json();
+  const data: Drinks = await response.json();
   return data;
 }
 
-export async function fetchCocktail(): Promise<Drink> {
-  const response = await fetch(baseUrl + `lookup.php?i=${DrinkID}`);
-  const data = await response.json();
-  return data;
+export async function fetchCocktail(id: string): Promise<CocktailDetails> {
+  const response = await fetch(baseUrl + `lookup.php?i=${id}`);
+  const data: Drink = await response.json();
+  const formattedData = formatCocktail(data.drinks[0]);
+  return formattedData;
 }
+
+const formatCocktail = (cocktail: DetailedResponse): CocktailDetails => {
+  let ingredients: IngredientMeasurePair[] = [];
+
+  for (let i = 1; i <= 15; i++) {
+    const ingredientKey = `strIngredient${i}` as keyof DetailedResponse;
+    const measureKey = `strMeasure${i}` as keyof DetailedResponse;
+
+    if (cocktail[ingredientKey] && cocktail[measureKey]) {
+      ingredients.push({
+        measure: cocktail[measureKey],
+        ingredient: cocktail[ingredientKey],
+      });
+    }
+  }
+
+  return {
+    id: cocktail.idDrink,
+    name: cocktail.strDrink,
+    type: cocktail.strAlcoholic,
+    glass: cocktail.strGlass,
+    instructions: cocktail.strInstructions,
+    image: cocktail.strDrinkThumb,
+    ingredients: ingredients,
+  };
+};
