@@ -1,6 +1,6 @@
 "use client";
 
-import { Cocktail } from "@/app/api/cocktailsApi";
+import { Cocktail, CocktailDetails } from "@/app/api/cocktailsApi";
 import {
   Card,
   CardMedia,
