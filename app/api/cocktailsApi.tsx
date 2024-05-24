@@ -1,6 +1,5 @@
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 const ingredient: string = "Whiskey";
-const drinkID: string = "15300";
 
 export type Cocktail = {
   strDrink: string;
