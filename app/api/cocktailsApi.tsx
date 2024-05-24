@@ -1,24 +1,24 @@
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 const ingredient: string = "Whiskey";
 
-export type Cocktail = {
+export interface Cocktail {
   strDrink: string;
   strDrinkThumb: string;
   idDrink: string;
-};
+}
 
-export type Drinks = {
+export interface Drinks {
   drinks: Cocktail[];
-};
+}
 
-export type Drink = {
+export interface Drink {
   drinks: DetailedResponse[];
-};
+}
 
-export type IngredientMeasurePair = {
+export interface IngredientMeasurePair {
   measure: string;
   ingredient: string;
-};
+}
 
 export type IngredientMeasures = IngredientMeasurePair[];
 
@@ -32,7 +32,40 @@ export type CocktailDetails = {
   ingredients: IngredientMeasures;
 };
 
-export type DetailedResponse = {
+type IngredientKey = `strIngredient${
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15}`;
+type MeasureKey = `strMeasure${
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15}`;
+
+export interface DetailedResponseBase {
   idDrink: string;
   strDrink: string;
   strCategory: string;
@@ -40,36 +73,10 @@ export type DetailedResponse = {
   strGlass: string;
   strInstructions: string;
   strDrinkThumb: string;
-  strIngredient1: string;
-  strIngredient2: string | null;
-  strIngredient3: string | null;
-  strIngredient4: string | null;
-  strIngredient5: string | null;
-  strIngredient6: string | null;
-  strIngredient7: string | null;
-  strIngredient8: string | null;
-  strIngredient9: string | null;
-  strIngredient10: string | null;
-  strIngredient11: string | null;
-  strIngredient12: string | null;
-  strIngredient13: string | null;
-  strIngredient14: string | null;
-  strIngredient15: string | null;
-  strMeasure1: string;
-  strMeasure2: string;
-  strMeasure3: string | null;
-  strMeasure4: string | null;
-  strMeasure5: string | null;
-  strMeasure6: string | null;
-  strMeasure7: string | null;
-  strMeasure8: string | null;
-  strMeasure9: string | null;
-  strMeasure10: string | null;
-  strMeasure11: string | null;
-  strMeasure12: string | null;
-  strMeasure13: string | null;
-  strMeasure14: string | null;
-  strMeasure15: string | null;
+}
+
+export type DetailedResponse = DetailedResponseBase & {
+  [key in IngredientKey | MeasureKey]?: string | null;
 };
 
 export async function fetchCocktails(): Promise<Drinks> {
@@ -89,8 +96,8 @@ const formatCocktail = (cocktail: DetailedResponse): CocktailDetails => {
   let ingredients: IngredientMeasurePair[] = [];
 
   for (let i = 1; i <= 15; i++) {
-    const ingredientKey = `strIngredient${i}` as keyof DetailedResponse;
-    const measureKey = `strMeasure${i}` as keyof DetailedResponse;
+    const ingredientKey = `strIngredient${i}` as IngredientKey;
+    const measureKey = `strMeasure${i}` as MeasureKey;
 
     if (cocktail[ingredientKey] && cocktail[measureKey]) {
       ingredients.push({

@@ -1,8 +1,6 @@
 "use client";
 import { useCocktails } from "@/app/hooks/useCocktails";
-import { fetchCocktails } from "@/app/api/cocktailsApi";
-import { Box, styled, Container } from "@mui/material";
-import { Cocktail } from "@/app/api/cocktailsApi";
+import { Box, styled } from "@mui/material";
 import CocktailCard from "../CocktailCard/CocktailCard";
 import Link from "next/link";
 
@@ -22,8 +20,8 @@ export default function CocktailsDisplay(): JSX.Element {
       {cocktails &&
         cocktails.drinks.map((cocktail) => {
           return (
-            <Link href={`/drinks/${cocktail.idDrink}`}>
-              <CocktailCard key={cocktail.idDrink} {...cocktail}></CocktailCard>
+            <Link key={cocktail.idDrink} href={`/drinks/${cocktail.idDrink}`}>
+              <CocktailCard {...cocktail}></CocktailCard>
             </Link>
           );
         })}
