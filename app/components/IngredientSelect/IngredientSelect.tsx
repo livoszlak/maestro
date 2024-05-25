@@ -6,14 +6,20 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import Link from "next/link";
-import { useState } from "react";
-import RedirectButton from "../Atoms/SubmitButton/RedirectButton";
+import { useContext } from "react";
+import { IngredientContext } from "@/app/contexts/IngredientContext";
+import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
 
 export default function IngredientSelect(): JSX.Element {
-  const [ingredient, setIngredient] = useState("");
+  const context = useContext(IngredientContext);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  if (!context) {
+    throw new Error("no ingredient provider");
+  }
+
+  const { ingredient, setIngredient } = context;
+
+  const handleChange = (event: SelectChangeEvent<String>) => {
     setIngredient(event.target.value as string);
   };
 
@@ -28,12 +34,18 @@ export default function IngredientSelect(): JSX.Element {
           label="Ingredient"
           onChange={handleChange}
         >
-          <MenuItem value={"Gin"}>Gin</MenuItem>
           <MenuItem value={"Vodka"}>Vodka</MenuItem>
+          <MenuItem value={"Gin"}>Gin</MenuItem>
+          <MenuItem value={"Tequila"}>Tequila</MenuItem>
           <MenuItem value={"Whiskey"}>Whiskey</MenuItem>
+          <MenuItem value={"Bourbon"}>Bourbon</MenuItem>
+          <MenuItem value={"Light_rum"}>Light Rum</MenuItem>
+          <MenuItem value={"Dark_rum"}>Dark Rum</MenuItem>
+          <MenuItem value={"Brandy"}>Brandy</MenuItem>
+          <MenuItem value={"Cognac"}>Cognac</MenuItem>
         </Select>
       </FormControl>
-      {/* <RedirectButton {path="/drinks", label="hej"} /> */}
+      <RedirectButton path="/drinks" label="Go" />
     </>
   );
 }

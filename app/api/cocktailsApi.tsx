@@ -79,7 +79,7 @@ export type DetailedResponse = DetailedResponseBase & {
   [key in IngredientKey | MeasureKey]?: string | null;
 };
 
-export async function fetchCocktails(): Promise<Drinks> {
+export async function fetchCocktails(ingredient: string): Promise<Drinks> {
   const response = await fetch(baseUrl + `filter.php?i=${ingredient}`);
   const data: Drinks = await response.json();
   return data;

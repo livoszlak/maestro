@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react";
 import { fetchCocktails, Drinks } from "../api/cocktailsApi";
 
-export const useCocktails = () => {
+export const useCocktails = (ingredient: string) => {
   const [cocktails, setCocktails] = useState<Drinks>();
 
   useEffect(() => {
     const getCocktails = async () => {
-      const cocktailsFromApi = await fetchCocktails();
+      const cocktailsFromApi = await fetchCocktails(ingredient);
       setCocktails(cocktailsFromApi);
     };
 
