@@ -6,11 +6,13 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { IngredientContext } from "@/app/contexts/IngredientContext";
 import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
 
 export default function IngredientSelect(): JSX.Element {
+  const router = useRouter();
   const context = useContext(IngredientContext);
 
   if (!context) {
@@ -21,6 +23,7 @@ export default function IngredientSelect(): JSX.Element {
 
   const handleChange = (event: SelectChangeEvent<String>) => {
     setIngredient(event.target.value as string);
+    router.push("/drinks");
   };
 
   return (
@@ -45,7 +48,7 @@ export default function IngredientSelect(): JSX.Element {
           <MenuItem value={"Cognac"}>Cognac</MenuItem>
         </Select>
       </FormControl>
-      <RedirectButton path="/drinks" label="Go" />
+      {/* <RedirectButton path="/drinks" label="Go" /> */}
     </>
   );
 }
