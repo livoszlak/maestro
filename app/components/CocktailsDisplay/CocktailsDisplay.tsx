@@ -18,7 +18,7 @@ export default function CocktailsDisplay(): JSX.Element {
   const context = useContext(IngredientContext);
 
   if (!context) {
-    throw new Error("No ingredient provider");
+    throw new Error("No ingredient provider :(");
   }
 
   const { ingredient } = context;
