@@ -29,7 +29,7 @@ export default function CocktailsDisplay(): JSX.Element {
       {cocktails &&
         cocktails.drinks.map((cocktail) => {
           return (
-            <Link key={cocktail.idDrink} href={`/drinks/${cocktail.idDrink}`}>
+            <Link key={cocktail.id} href={`/drinks/${cocktail.id}`}>
               <CocktailCard {...cocktail}></CocktailCard>
             </Link>
           );
