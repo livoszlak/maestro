@@ -16,8 +16,8 @@ export interface Drink {
 }
 
 export interface IngredientMeasurePair {
-  measure: string;
-  ingredient: string;
+  measure: string | null | undefined;
+  ingredient: string | null | undefined;
 }
 
 export type IngredientMeasures = IngredientMeasurePair[];
