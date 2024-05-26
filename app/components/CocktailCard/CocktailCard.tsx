@@ -24,7 +24,12 @@ export default function CocktailCard(cocktail: Cocktail): JSX.Element {
         title={`image portraying ${cocktail.strDrink}`}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          sx={{ width: 240 }}
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
           {cocktail.strDrink}
         </Typography>
       </CardContent>
