@@ -20,8 +20,8 @@ export default function CocktailCard(cocktail: Cocktail): JSX.Element {
     <StyledCard sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 240 }}
-        image={cocktail.strDrinkThumb + "/preview"}
-        title={`image portraying ${cocktail.strDrink}`}
+        image={cocktail.image + "/preview"}
+        title={`image portraying ${cocktail.name}`}
       />
       <CardContent>
         <Typography
@@ -30,7 +30,7 @@ export default function CocktailCard(cocktail: Cocktail): JSX.Element {
           variant="h5"
           component="div"
         >
-          {cocktail.strDrink}
+          {cocktail.name}
         </Typography>
       </CardContent>
       <CardActions>
