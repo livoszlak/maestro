@@ -1,10 +1,9 @@
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
-const ingredient: string = "Whiskey";
 
 export interface Cocktail {
-  strDrink: string;
-  strDrinkThumb: string;
-  idDrink: string;
+  name: string;
+  image: string;
+  id: string;
 }
 
 export interface Drinks {
@@ -48,6 +47,7 @@ type IngredientKey = `strIngredient${
   | 13
   | 14
   | 15}`;
+
 type MeasureKey = `strMeasure${
   | 1
   | 2
@@ -75,6 +75,11 @@ export interface DetailedResponseBase {
   strDrinkThumb: string;
 }
 
+export type ResponseBase = Pick<
+  DetailedResponseBase,
+  "strDrink" | "strDrinkThumb" | "idDrink"
+>;
+
 export type DetailedResponse = DetailedResponseBase & {
   [key in IngredientKey | MeasureKey]?: string | null;
 };
@@ -88,11 +93,19 @@ export async function fetchCocktails(ingredient: string): Promise<Drinks> {
 export async function fetchCocktail(id: string): Promise<CocktailDetails> {
   const response = await fetch(baseUrl + `lookup.php?i=${id}`);
   const data: Drink = await response.json();
-  const formattedData = formatCocktail(data.drinks[0]);
+  const formattedData = formatCocktailDetails(data.drinks[0]);
   return formattedData;
 }
 
-const formatCocktail = (cocktail: DetailedResponse): CocktailDetails => {
+export function formatCocktail(cocktail: ResponseBase): Cocktail {
+  return {
+    name: cocktail.strDrink,
+    image: cocktail.strDrinkThumb,
+    id: cocktail.idDrink,
+  };
+}
+
+const formatCocktailDetails = (cocktail: DetailedResponse): CocktailDetails => {
   let ingredients: IngredientMeasurePair[] = [];
 
   for (let i = 1; i <= 15; i++) {
