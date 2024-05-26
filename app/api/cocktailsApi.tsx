@@ -7,7 +7,7 @@ export interface Cocktail {
 }
 
 export interface Drinks {
-  drinks: Cocktail[];
+  drinks: ResponseBase[];
 }
 
 export interface Drink {
@@ -84,10 +84,12 @@ export type DetailedResponse = DetailedResponseBase & {
   [key in IngredientKey | MeasureKey]?: string | null;
 };
 
-export async function fetchCocktails(ingredient: string): Promise<Drinks> {
+export async function fetchCocktails(ingredient: string): Promise<Cocktail[]> {
   const response = await fetch(baseUrl + `filter.php?i=${ingredient}`);
   const data: Drinks = await response.json();
-  return data;
+  const formattedData = formatCocktails(data.drinks);
+  console.log(formattedData);
+  return formattedData;
 }
 
 export async function fetchCocktail(id: string): Promise<CocktailDetails> {
@@ -97,13 +99,18 @@ export async function fetchCocktail(id: string): Promise<CocktailDetails> {
   return formattedData;
 }
 
-export function formatCocktail(cocktail: ResponseBase): Cocktail {
-  return {
-    name: cocktail.strDrink,
-    image: cocktail.strDrinkThumb,
-    id: cocktail.idDrink,
-  };
-}
+const formatCocktails = (cocktails: ResponseBase[]): Cocktail[] => {
+  const testReturn: Cocktail[] = [];
+
+  for (let i: number = 0; i < cocktails.length; i++) {
+    testReturn.push({
+      name: cocktails[i].strDrink,
+      image: cocktails[i].strDrinkThumb,
+      id: cocktails[i].idDrink,
+    });
+  }
+  return testReturn;
+};
 
 const formatCocktailDetails = (cocktail: DetailedResponse): CocktailDetails => {
   let ingredients: IngredientMeasurePair[] = [];
