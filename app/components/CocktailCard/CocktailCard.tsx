@@ -21,7 +21,7 @@ export default function CocktailCard(cocktail: Cocktail): JSX.Element {
       <CardMedia
         sx={{ height: 240 }}
         image={cocktail.image + "/preview"}
-        title={`image portraying ${cocktail.name}`}
+        title={`Image portraying ${cocktail.name}`}
       />
       <CardContent>
         <Typography
