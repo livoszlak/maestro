@@ -4,6 +4,7 @@ import { Box, Typography, styled } from "@mui/material";
 import CocktailCard from "../CocktailCard/CocktailCard";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -20,6 +21,14 @@ export default function CocktailsDisplay(): JSX.Element {
 
   if (!ingredient) {
     return <h1>No ingredient provided</h1>;
+  }
+
+  if (cocktails === undefined) {
+    return (
+      <Typography sx={{ textAlign: "center" }} variant="h4">
+        Uh oh
+      </Typography>
+    );
   }
 
   if (!cocktails) {
@@ -40,7 +49,7 @@ export default function CocktailsDisplay(): JSX.Element {
           cocktails?.map((cocktail, index) => {
             return (
               <Link key={index} href={`/drinks/${cocktail.id}`}>
-                <CocktailCard {...cocktail}></CocktailCard>
+                <CocktailCard cocktail={cocktail} />
               </Link>
             );
           })}

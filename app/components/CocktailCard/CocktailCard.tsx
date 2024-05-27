@@ -15,7 +15,13 @@ const StyledCard = styled(Card)({
   width: "100%",
 });
 
-export default function CocktailCard(cocktail: Cocktail): JSX.Element {
+interface CocktailCardProps {
+  cocktail: Cocktail;
+}
+
+export default function CocktailCard({
+  cocktail,
+}: CocktailCardProps): JSX.Element {
   return (
     <StyledCard sx={{ maxWidth: 345 }}>
       <CardMedia
