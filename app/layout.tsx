@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { IngredientProvider } from "./contexts/IngredientContext";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
@@ -18,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <IngredientProvider>
+
       <html lang="en">
         <body className={inter.className}>
           <Header />
@@ -26,6 +25,5 @@ export default function RootLayout({
           <Footer />
         </body>
       </html>
-    </IngredientProvider>
   );
 }

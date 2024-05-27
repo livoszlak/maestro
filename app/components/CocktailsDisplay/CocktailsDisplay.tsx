@@ -3,8 +3,7 @@ import { useCocktails } from "@/app/hooks/useCocktails";
 import { Box, Typography, styled } from "@mui/material";
 import CocktailCard from "../CocktailCard/CocktailCard";
 import Link from "next/link";
-import { useContext } from "react";
-import { IngredientContext } from "@/app/contexts/IngredientContext";
+import { useSearchParams } from "next/navigation";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -15,15 +14,21 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 export default function CocktailsDisplay(): JSX.Element {
-  const context = useContext(IngredientContext);
+  const searchParams = useSearchParams();
+  const ingredient = searchParams.get("ingredient") || "";
+  const cocktails = useCocktails(ingredient);
 
-  if (!context) {
-    throw new Error("No ingredient provider :(");
+  if (!ingredient) {
+    return <h1>No ingredient provided</h1>;
   }
 
-  const { ingredient } = context;
-
-  const cocktails = useCocktails(ingredient);
+  if (!cocktails) {
+    return (
+      <Typography sx={{ textAlign: "center" }} variant="h4">
+        Mixing cocktails...
+      </Typography>
+    );
+  }
 
   return (
     <>

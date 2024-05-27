@@ -6,29 +6,28 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import { IngredientContext } from "@/app/contexts/IngredientContext";
-import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from "react";
+import { ingredients } from "@/app/constants/constants";
 
 export default function IngredientSelect(): JSX.Element {
+  const pathname = usePathname();
   const router = useRouter();
-  const context = useContext(IngredientContext);
 
-  if (!context) {
-    throw new Error("no ingredient provider");
-  }
-
-  const { ingredient, setIngredient } = context;
+  const [ingredient, setIngredient] = useState<String>("");
 
   const handleChange = (event: SelectChangeEvent<String>) => {
-    setIngredient(event.target.value as string);
-    router.push("/drinks");
+    const selectedIngredient = event.target.value as string;
+    setIngredient(selectedIngredient);
+
+    const params = new URLSearchParams();
+    params.set("ingredient", selectedIngredient);
+    router.push(`drinks/${pathname}?${params.toString()}`);
   };
 
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl fullWidth variant="filled">
         <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -37,18 +36,15 @@ export default function IngredientSelect(): JSX.Element {
           label="Ingredient"
           onChange={handleChange}
         >
-          <MenuItem value={"Vodka"}>Vodka</MenuItem>
-          <MenuItem value={"Gin"}>Gin</MenuItem>
-          <MenuItem value={"Tequila"}>Tequila</MenuItem>
-          <MenuItem value={"Whiskey"}>Whiskey</MenuItem>
-          <MenuItem value={"Bourbon"}>Bourbon</MenuItem>
-          <MenuItem value={"Light_rum"}>Light Rum</MenuItem>
-          <MenuItem value={"Dark_rum"}>Dark Rum</MenuItem>
-          <MenuItem value={"Brandy"}>Brandy</MenuItem>
-          <MenuItem value={"Cognac"}>Cognac</MenuItem>
+          {ingredients.map((ingredient, index) => {
+            return (
+              <MenuItem key={index} value={ingredient.apiKey}>
+                {ingredient.name}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
-      {/* <RedirectButton path="/drinks" label="Go" /> */}
     </>
   );
 }
