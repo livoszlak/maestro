@@ -7,10 +7,8 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useRouter, usePathname } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
-import { IngredientContext } from "@/app/contexts/IngredientContext";
+import { useState } from "react";
 import { ingredients } from "@/app/constants/constants";
-import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
 
 export default function IngredientSelect(): JSX.Element {
   const pathname = usePathname();
