@@ -6,25 +6,23 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import { IngredientContext } from "@/app/contexts/IngredientContext";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from "react";
 import { ingredients } from "@/app/constants/constants";
-import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
 
 export default function IngredientSelect(): JSX.Element {
+  const pathname = usePathname();
   const router = useRouter();
-  const context = useContext(IngredientContext);
 
-  if (!context) {
-    throw new Error("no ingredient provider");
-  }
-
-  const { ingredient, setIngredient } = context;
+  const [ingredient, setIngredient] = useState<String>("");
 
   const handleChange = (event: SelectChangeEvent<String>) => {
-    setIngredient(event.target.value as string);
-    router.push("/drinks");
+    const selectedIngredient = event.target.value as string;
+    setIngredient(selectedIngredient);
+
+    const params = new URLSearchParams();
+    params.set("ingredient", selectedIngredient);
+    router.push(`drinks/${pathname}?${params.toString()}`);
   };
 
   return (

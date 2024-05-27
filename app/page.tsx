@@ -5,7 +5,7 @@ import IngredientSelect from "./components/IngredientSelect/IngredientSelect";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <IngredientSelect></IngredientSelect>
+      <IngredientSelect />
     </main>
   );
 }

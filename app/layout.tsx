@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { IngredientProvider } from "./contexts/IngredientContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <IngredientProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </IngredientProvider>
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
   );
 }
