@@ -32,7 +32,7 @@ export default function CocktailsDisplay(): JSX.Element {
       </Typography>
       <StyledBox>
         {cocktails &&
-          cocktails.drinks.map((cocktail, index) => {
+          cocktails?.map((cocktail, index) => {
             return (
               <Link key={index} href={`/drinks/${cocktail.id}`}>
                 <CocktailCard {...cocktail}></CocktailCard>
