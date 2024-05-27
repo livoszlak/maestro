@@ -30,8 +30,8 @@ export type Cocktail = {
 
 // Type for formatting of ingredient and measure properties received in fetchCocktail
 export interface IngredientMeasurePair {
-  measure: string | null | undefined;
-  ingredient: string | null | undefined;
+  measure: string | null;
+  ingredient: string | null;
 }
 
 // Type for transforming keys on data received in fetchCocktail

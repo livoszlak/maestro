@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { IngredientContext } from "@/app/contexts/IngredientContext";
+import { ingredients } from "@/app/constants/constants";
 import RedirectButton from "../Atoms/RedirectButton/RedirectButton";
 
 export default function IngredientSelect(): JSX.Element {
@@ -28,7 +29,7 @@ export default function IngredientSelect(): JSX.Element {
 
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl fullWidth variant="filled">
         <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -37,18 +38,15 @@ export default function IngredientSelect(): JSX.Element {
           label="Ingredient"
           onChange={handleChange}
         >
-          <MenuItem value={"Vodka"}>Vodka</MenuItem>
-          <MenuItem value={"Gin"}>Gin</MenuItem>
-          <MenuItem value={"Tequila"}>Tequila</MenuItem>
-          <MenuItem value={"Whiskey"}>Whiskey</MenuItem>
-          <MenuItem value={"Bourbon"}>Bourbon</MenuItem>
-          <MenuItem value={"Light_rum"}>Light Rum</MenuItem>
-          <MenuItem value={"Dark_rum"}>Dark Rum</MenuItem>
-          <MenuItem value={"Brandy"}>Brandy</MenuItem>
-          <MenuItem value={"Cognac"}>Cognac</MenuItem>
+          {ingredients.map((ingredient, index) => {
+            return (
+              <MenuItem key={index} value={ingredient.apiKey}>
+                {ingredient.name}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
-      {/* <RedirectButton path="/drinks" label="Go" /> */}
     </>
   );
 }
