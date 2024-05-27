@@ -1,26 +1,40 @@
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 
-export interface Cocktail {
+// Type for data initially received in fetchCocktail
+export interface RawCocktailDetails {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+  strAlcoholic: string;
+  strGlass: string;
+  strInstructions: string;
+  [key: string]: string | null;
+}
+
+// Type for data initially received in fetchCocktails
+export type RawCocktail = Pick<
+  RawCocktailDetails,
+  "idDrink" | "strDrink" | "strDrinkThumb"
+> & {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+};
+
+// Type for transforming keys on data received in fetchCocktails
+export type Cocktail = {
+  id: string;
   name: string;
   image: string;
-  id: string;
-}
+};
 
-export interface Drinks {
-  drinks: ResponseBase[];
-}
-
-export interface Drink {
-  drinks: DetailedResponse[];
-}
-
+// Type for formatting of ingredient and measure properties received in fetchCocktail
 export interface IngredientMeasurePair {
   measure: string | null | undefined;
   ingredient: string | null | undefined;
 }
 
-export type IngredientMeasures = IngredientMeasurePair[];
-
+// Type for transforming keys on data received in fetchCocktail
 export type CocktailDetails = {
   id: string;
   name: string;
@@ -28,9 +42,10 @@ export type CocktailDetails = {
   glass: string;
   instructions: string;
   image: string;
-  ingredients: IngredientMeasures;
+  ingredients: IngredientMeasurePair[];
 };
 
+// Literal type for helping with formatting and inserting data into the IngredientMeasurePair array correctly
 type IngredientKey = `strIngredient${
   | 1
   | 2
@@ -48,6 +63,7 @@ type IngredientKey = `strIngredient${
   | 14
   | 15}`;
 
+// Literal type for same use case as IngredientKey
 type MeasureKey = `strMeasure${
   | 1
   | 2
@@ -65,69 +81,41 @@ type MeasureKey = `strMeasure${
   | 14
   | 15}`;
 
-export interface DetailedResponseBase {
-  idDrink: string;
-  strDrink: string;
-  strCategory: string;
-  strAlcoholic: string;
-  strGlass: string;
-  strInstructions: string;
-  strDrinkThumb: string;
-}
-
-export type ResponseBase = Pick<
-  DetailedResponseBase,
-  "strDrink" | "strDrinkThumb" | "idDrink"
->;
-
-export type DetailedResponse = DetailedResponseBase & {
-  [key in IngredientKey | MeasureKey]?: string | null;
-};
-
+// Fetches all cocktails that match the selected ingredient, and returns an array of formatted Cocktails
 export async function fetchCocktails(ingredient: string): Promise<Cocktail[]> {
-  const response = await fetch(baseUrl + `filter.php?i=${ingredient}`);
-  const data: Drinks = await response.json();
-  const formattedData = formatCocktails(data.drinks);
-  console.log(formattedData);
-  return formattedData;
+  const response = await fetch(`${baseUrl}filter.php?i=${ingredient}`);
+  const data = await response.json();
+  return data.drinks.map(formatCocktail);
 }
 
+// Fetches details about selected cocktail and returns a formatted object of cocktail details
 export async function fetchCocktail(id: string): Promise<CocktailDetails> {
-  const response = await fetch(baseUrl + `lookup.php?i=${id}`);
-  const data: Drink = await response.json();
-  const formattedData = formatCocktailDetails(data.drinks[0]);
-  return formattedData;
+  const response = await fetch(`${baseUrl}lookup.php?i=${id}`);
+  const data = await response.json();
+  return formatCocktailDetails(data.drinks[0]);
 }
 
-const formatCocktails = (cocktails: ResponseBase[]): Cocktail[] => {
-  const testReturn: Cocktail[] = [];
+// Formats raw data from fetchCocktail for better named keys
+function formatCocktail(cocktail: RawCocktailDetails): Cocktail {
+  return {
+    id: cocktail.idDrink,
+    name: cocktail.strDrink,
+    image: cocktail.strDrinkThumb,
+  };
+}
 
-  for (let i: number = 0; i < cocktails.length; i++) {
-    testReturn.push({
-      name: cocktails[i].strDrink,
-      image: cocktails[i].strDrinkThumb,
-      id: cocktails[i].idDrink,
-    });
-  }
-  return testReturn;
-};
-
-const formatCocktailDetails = (cocktail: DetailedResponse): CocktailDetails => {
-  let ingredients: IngredientMeasurePair[] = [];
+// Formats raw data from fetchCocktails for better named keys
+function formatCocktailDetails(cocktail: RawCocktailDetails): CocktailDetails {
+  const ingredients: IngredientMeasurePair[] = [];
 
   for (let i = 1; i <= 15; i++) {
     const ingredientKey = `strIngredient${i}` as IngredientKey;
     const measureKey = `strMeasure${i}` as MeasureKey;
 
-    if (
-      cocktail[ingredientKey] &&
-      cocktail[measureKey] &&
-      cocktail[ingredientKey] !== "null" &&
-      cocktail[measureKey] !== "null"
-    ) {
+    if (cocktail[ingredientKey]) {
       ingredients.push({
-        measure: cocktail[measureKey],
         ingredient: cocktail[ingredientKey],
+        measure: cocktail[measureKey],
       });
     }
   }
@@ -139,6 +127,6 @@ const formatCocktailDetails = (cocktail: DetailedResponse): CocktailDetails => {
     glass: cocktail.strGlass,
     instructions: cocktail.strInstructions,
     image: cocktail.strDrinkThumb,
-    ingredients: ingredients,
+    ingredients,
   };
-};
+}
