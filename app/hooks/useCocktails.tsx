@@ -12,6 +12,6 @@ export const useCocktails = (ingredient: string) => {
     };
 
     getCocktails();
-  }, []);
+  }, [ingredient]);
   return cocktails;
 };
