@@ -14,9 +14,9 @@ export default function IngredientSelect(): JSX.Element {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [ingredient, setIngredient] = useState<String>("");
+  const [ingredient, setIngredient] = useState<string>("");
 
-  const handleChange = (event: SelectChangeEvent<String>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     const selectedIngredient = event.target.value as string;
     setIngredient(selectedIngredient);
 
