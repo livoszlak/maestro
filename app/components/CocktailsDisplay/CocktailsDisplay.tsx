@@ -5,6 +5,7 @@ import CocktailCard from "../CocktailCard/CocktailCard";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import React, { Suspense } from "react";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -14,7 +15,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-export default function CocktailsDisplay(): JSX.Element {
+function CocktailsDisplay(): JSX.Element {
   const searchParams = useSearchParams();
   const ingredient = searchParams.get("ingredient") || "";
   const cocktails = useCocktails(ingredient);
@@ -55,5 +56,19 @@ export default function CocktailsDisplay(): JSX.Element {
           })}
       </StyledBox>
     </>
+  );
+}
+
+export default function WrappedCocktailsDisplay(): JSX.Element {
+  return (
+    <Suspense
+      fallback={
+        <Typography sx={{ textAlign: "center" }} variant="h4">
+          Mixing cocktails...
+        </Typography>
+      }
+    >
+      <CocktailsDisplay />
+    </Suspense>
   );
 }
