@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import React, { Suspense } from "react";
+import Loading from "../Loading/Loading";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -25,7 +26,7 @@ function CocktailsDisplay(): JSX.Element {
   }
 
   if (cocktails === undefined) {
-    return <Typography sx={{ textAlign: "center" }} variant="h4"></Typography>;
+    return <Loading />;
   }
 
   if (!cocktails) {
