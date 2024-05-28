@@ -1,3 +1,4 @@
+import spilled from "../drinks/[slug]/spilled_drink.svg";
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 
 // Type for data initially received in fetchCocktail
@@ -84,15 +85,37 @@ type MeasureKey = `strMeasure${
 // Fetches all cocktails that match the selected ingredient, and returns an array of formatted Cocktails
 export async function fetchCocktails(ingredient: string): Promise<Cocktail[]> {
   const response = await fetch(`${baseUrl}filter.php?i=${ingredient}`);
-  const data = await response.json();
-  return data.drinks.map(formatCocktail);
+  try {
+    const data = await response.json();
+    return data.drinks.map(formatCocktail);
+  } catch (error) {
+    return [
+      {
+        id: "1",
+        name: "No drinks found on that ingredient",
+        image: "/spilled_drink.svg",
+      },
+    ];
+  }
 }
 
 // Fetches details about selected cocktail and returns a formatted object of cocktail details
 export async function fetchCocktail(id: string): Promise<CocktailDetails> {
   const response = await fetch(`${baseUrl}lookup.php?i=${id}`);
-  const data = await response.json();
-  return formatCocktailDetails(data.drinks[0]);
+  try {
+    const data = await response.json();
+    return formatCocktailDetails(data.drinks[0]);
+  } catch (error) {
+    return {
+      id: "1",
+      name: "No drink found with that id",
+      type: "no drink found",
+      glass: "",
+      instructions: "please try again",
+      image: "/spilled_drink.svg",
+      ingredients: [],
+    };
+  }
 }
 
 // Formats raw data from fetchCocktail for better named keys

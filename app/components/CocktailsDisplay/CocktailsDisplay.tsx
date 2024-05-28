@@ -25,11 +25,7 @@ function CocktailsDisplay(): JSX.Element {
   }
 
   if (cocktails === undefined) {
-    return (
-      <Typography sx={{ textAlign: "center" }} variant="h4">
-        Uh oh
-      </Typography>
-    );
+    return <Typography sx={{ textAlign: "center" }} variant="h4"></Typography>;
   }
 
   if (!cocktails) {
