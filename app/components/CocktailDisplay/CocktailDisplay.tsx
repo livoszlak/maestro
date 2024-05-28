@@ -14,7 +14,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Theme } from "@mui/material";
 import Loading from "../Loading/Loading";
 import Confetti from "../Confetti/Confetti";
 
@@ -27,7 +26,7 @@ const StyledDisplay = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   maxWidth: 500,
   height: "100%",
   backgroundColor: "#fcf8ed",

@@ -4,7 +4,6 @@ import { Box, Typography, styled } from "@mui/material";
 import CocktailCard from "../CocktailCard/CocktailCard";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
 import React, { Suspense } from "react";
 import Loading from "../Loading/Loading";
 

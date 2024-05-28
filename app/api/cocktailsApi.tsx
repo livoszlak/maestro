@@ -1,4 +1,3 @@
-import spilled from "../drinks/[slug]/spilled_drink.svg";
 const baseUrl: string = "https://www.thecocktaildb.com/api/json/v1/1/";
 
 // Type for data initially received in fetchCocktail
