@@ -1,8 +1,17 @@
 "use client";
 export default function Footer(): JSX.Element {
   return (
-    <div className="footer">
-      <p>I am a footer!</p>
-    </div>
+    <footer>
+      <p>
+        "Hallå maestro!" -{" "}
+        <a href="https://github.com/AntonBeYt/AntonBeYt">
+          Anton Bernhardsson Yttring
+        </a>{" "}
+        & <a href="https://github.com/livoszlak">Liv Oszlak</a>
+      </p>
+      <p>
+        Using the <a href="https://www.thecocktaildb.com/">CocktailDB API</a>
+      </p>
+    </footer>
   );
 }
