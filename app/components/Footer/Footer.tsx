@@ -7,7 +7,7 @@ export default function Footer(): JSX.Element {
         &ldquo;Hallå maestro!&ldquo;
       </Typography>
       <Typography variant="subtitle1" sx={{ fontSize: "14px" }}>
-        A TypeScript project by&nbsp;
+        A TypeScript project by the maestros: <br />
         <Link
           className="maestros"
           variant="subtitle1"

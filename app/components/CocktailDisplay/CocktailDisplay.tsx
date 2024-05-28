@@ -59,7 +59,7 @@ export default function CocktailDisplay({
             <Typography
               variant="overline"
               component="div"
-              sx={{ paddingY: 1, fontSize: "2rem" }}
+              sx={{ paddingY: 1, fontSize: "2rem", lineHeight: 1 }}
             >
               {cocktail?.name}
             </Typography>
