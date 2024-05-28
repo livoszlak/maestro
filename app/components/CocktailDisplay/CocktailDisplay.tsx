@@ -44,14 +44,16 @@ export default function CocktailDisplay({
           alt={`Image portraying ${cocktail?.name}`}
         />
         <CardContent>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" sx={{ paddingY: 1 }}>
             {cocktail?.name}
           </Typography>
-          <Chip label={cocktail?.type} />
-          <Typography variant="body2">{cocktail?.instructions}</Typography>
+          <Chip label={cocktail?.type} /> <Chip label={cocktail?.glass} />
+          <Typography variant="body2" sx={{ paddingY: 2 }}>
+            {cocktail?.instructions}
+          </Typography>
         </CardContent>
 
-        <List>
+        <List sx={{ padding: 0 }}>
           {cocktail?.ingredients.map((ingredient, index) => {
             return (
               <ListItem key={index}>

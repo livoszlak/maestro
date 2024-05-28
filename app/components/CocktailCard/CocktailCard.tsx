@@ -39,9 +39,6 @@ export default function CocktailCard({
           {cocktail.name}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </StyledCard>
   );
 }

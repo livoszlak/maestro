@@ -27,7 +27,7 @@ export default function IngredientSelect(): JSX.Element {
 
   return (
     <>
-      <FormControl fullWidth variant="filled">
+      <FormControl fullWidth variant="filled" sx={{ maxWidth: "300px" }}>
         <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
         <Select
           labelId="demo-simple-select-label"

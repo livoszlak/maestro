@@ -5,7 +5,7 @@ export default function Header(): JSX.Element {
   return (
     <header>
       <Image
-        src="/maestro.svg"
+        src="/maestro-orange.svg"
         alt="Maestro"
         layout="responsive"
         width={1027}
