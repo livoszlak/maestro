@@ -114,6 +114,11 @@ header {
   align-self: center;
 }
 
+.loading {
+  width: 300px;
+  height: 300px;
+}
+
 main {
 }
 
