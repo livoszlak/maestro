@@ -26,7 +26,7 @@ export default function CocktailCard({
     <StyledCard sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 240 }}
-        image={cocktail.image + "/preview"}
+        image={cocktail.image}
         title={`Image portraying ${cocktail.name}`}
       />
       <CardContent>
