@@ -17,6 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Theme } from "@mui/material";
 import Loading from "../Loading/Loading";
 
+
 const StyledDisplay = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "100%",
@@ -64,6 +65,7 @@ export default function CocktailDisplay({
               <ListItem key={index}>
                 <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
                 <ListItemText
+
                   primary={
                     ingredient.measure !== null
                       ? `${ingredient.measure} ${ingredient.ingredient}`
