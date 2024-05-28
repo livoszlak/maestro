@@ -27,18 +27,30 @@ export default function IngredientSelect(): JSX.Element {
 
   return (
     <>
-      <FormControl fullWidth variant="filled" sx={{ maxWidth: "300px" }}>
-        <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
+      <FormControl
+        fullWidth
+        variant="filled"
+        sx={{
+          maxWidth: "300px",
+          backgroundColor: "#fcf8ed",
+          borderRadius: "5px",
+        }}
+      >
+        <InputLabel id="ingredient-select-label">Ingredient</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="ingredient-select-label"
+          id="ingredient-select"
           value={ingredient}
           label="Ingredient"
           onChange={handleChange}
         >
           {ingredients.map((ingredient, index) => {
             return (
-              <MenuItem key={index} value={ingredient.apiKey}>
+              <MenuItem
+                sx={{ backgroundColor: "#fcf8ed" }}
+                key={index}
+                value={ingredient.apiKey}
+              >
                 {ingredient.name}
               </MenuItem>
             );
