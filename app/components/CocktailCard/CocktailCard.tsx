@@ -13,6 +13,8 @@ import {
 
 const StyledCard = styled(Card)({
   width: "100%",
+  minHeight: "350px",
+  backgroundColor: "#fcf8ed",
 });
 
 interface CocktailCardProps {
