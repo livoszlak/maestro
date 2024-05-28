@@ -17,7 +17,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { Theme } from "@mui/material";
 import Loading from "../Loading/Loading";
 
-
 const StyledDisplay = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "100%",
@@ -25,6 +24,12 @@ const StyledDisplay = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(2),
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  maxWidth: 500,
+  height: "100%",
+  backgroundColor: "#fcf8ed",
 }));
 
 interface CocktailDisplayProps {
@@ -42,15 +47,18 @@ export default function CocktailDisplay({
 
   return (
     <StyledDisplay>
-      <Card sx={{ maxWidth: 500, height: "100%" }}>
+      <StyledCard>
         <CardMedia
           component="img"
-          /* height="50%" */
           image={cocktail?.image}
           alt={`Image portraying ${cocktail?.name}`}
         />
         <CardContent>
-          <Typography variant="h5" component="div" sx={{ paddingY: 1 }}>
+          <Typography
+            variant="overline"
+            component="div"
+            sx={{ paddingY: 1, fontSize: "2rem" }}
+          >
             {cocktail?.name}
           </Typography>
           <Chip label={cocktail?.type} /> <Chip label={cocktail?.glass} />
@@ -65,7 +73,6 @@ export default function CocktailDisplay({
               <ListItem key={index}>
                 <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
                 <ListItemText
-
                   primary={
                     ingredient.measure !== null
                       ? `${ingredient.measure} ${ingredient.ingredient}`
@@ -76,7 +83,7 @@ export default function CocktailDisplay({
             );
           })}
         </List>
-      </Card>
+      </StyledCard>
     </StyledDisplay>
   );
 }
