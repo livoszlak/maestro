@@ -14,7 +14,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Theme } from "@mui/material";
 
 const StyledDisplay = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -60,6 +59,7 @@ export default function CocktailDisplay({
                 <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
                 <ListItemText
                   primary={`${ingredient.measure} ${ingredient.ingredient}`}
+                  sx={{ fontFamily: "Roboto Mono" }}
                 />
               </ListItem>
             );
