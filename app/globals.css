@@ -135,7 +135,28 @@ header {
   }
 }
 
-main {
+.index-copy {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 370px;
+}
+
+.maestro {
+  color: var(--orange);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.maestros {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.maestros:hover {
+  color: var(--bg-color-dark);
 }
 
 a {
