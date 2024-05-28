@@ -38,9 +38,15 @@ function CocktailsDisplay(): JSX.Element {
 
   return (
     <>
-      <Typography sx={{ textAlign: "center" }} variant="h4">
-        Displaying results for: {ingredient.replaceAll("_", " ")}
-      </Typography>
+      <Box sx={{ padding: "0 2rem 1rem", textAlign: "center" }}>
+        <Typography
+          sx={{ textAlign: "center", letterSpacing: 2, lineHeight: 1 }}
+          variant="overline"
+        >
+          Displaying results for:{" "}
+          <span className="ingredient">{ingredient.replaceAll("_", " ")}</span>
+        </Typography>
+      </Box>
       <StyledBox>
         {cocktails &&
           cocktails?.map((cocktail, index) => {
