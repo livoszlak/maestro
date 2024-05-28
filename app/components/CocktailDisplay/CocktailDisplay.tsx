@@ -16,6 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Theme } from "@mui/material";
 import Loading from "../Loading/Loading";
+import Confetti from "../Confetti/Confetti";
 
 const StyledDisplay = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -46,44 +47,47 @@ export default function CocktailDisplay({
   }
 
   return (
-    <StyledDisplay>
-      <StyledCard>
-        <CardMedia
-          component="img"
-          image={cocktail?.image}
-          alt={`Image portraying ${cocktail?.name}`}
-        />
-        <CardContent>
-          <Typography
-            variant="overline"
-            component="div"
-            sx={{ paddingY: 1, fontSize: "2rem" }}
-          >
-            {cocktail?.name}
-          </Typography>
-          <Chip label={cocktail?.type} /> <Chip label={cocktail?.glass} />
-          <Typography variant="body2" sx={{ paddingY: 2 }}>
-            {cocktail?.instructions}
-          </Typography>
-        </CardContent>
+    <>
+      <Confetti />
+      <StyledDisplay>
+        <StyledCard>
+          <CardMedia
+            component="img"
+            image={cocktail?.image}
+            alt={`Image portraying ${cocktail?.name}`}
+          />
+          <CardContent>
+            <Typography
+              variant="overline"
+              component="div"
+              sx={{ paddingY: 1, fontSize: "2rem" }}
+            >
+              {cocktail?.name}
+            </Typography>
+            <Chip label={cocktail?.type} /> <Chip label={cocktail?.glass} />
+            <Typography variant="body2" sx={{ paddingY: 2 }}>
+              {cocktail?.instructions}
+            </Typography>
+          </CardContent>
 
-        <List sx={{ padding: 0 }}>
-          {cocktail?.ingredients.map((ingredient, index) => {
-            return (
-              <ListItem key={index}>
-                <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
-                <ListItemText
-                  primary={
-                    ingredient.measure !== null
-                      ? `${ingredient.measure} ${ingredient.ingredient}`
-                      : `${ingredient.ingredient}`
-                  }
-                />
-              </ListItem>
-            );
-          })}
-        </List>
-      </StyledCard>
-    </StyledDisplay>
+          <List sx={{ padding: 0 }}>
+            {cocktail?.ingredients.map((ingredient, index) => {
+              return (
+                <ListItem key={index}>
+                  <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
+                  <ListItemText
+                    primary={
+                      ingredient.measure !== null
+                        ? `${ingredient.measure} ${ingredient.ingredient}`
+                        : `${ingredient.ingredient}`
+                    }
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
+        </StyledCard>
+      </StyledDisplay>
+    </>
   );
 }
