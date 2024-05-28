@@ -15,6 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Theme } from "@mui/material";
+import Loading from "../Loading/Loading";
 
 const StyledDisplay = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -33,6 +34,10 @@ export default function CocktailDisplay({
   slug,
 }: CocktailDisplayProps): JSX.Element {
   const cocktail = useCocktail(slug);
+
+  if (cocktail === undefined) {
+    return <Loading />;
+  }
 
   return (
     <StyledDisplay>
@@ -59,7 +64,11 @@ export default function CocktailDisplay({
               <ListItem key={index}>
                 <ListItemIcon>{<LiquorIcon />}</ListItemIcon>
                 <ListItemText
-                  primary={`${ingredient.measure} ${ingredient.ingredient}`}
+                  primary={
+                    ingredient.measure !== null
+                      ? `${ingredient.measure} ${ingredient.ingredient}`
+                      : `${ingredient.ingredient}`
+                  }
                 />
               </ListItem>
             );

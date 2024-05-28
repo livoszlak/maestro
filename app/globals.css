@@ -88,6 +88,11 @@
   margin: 0;
 }
 
+li {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 html,
 body {
   max-width: 100vw;
@@ -107,6 +112,11 @@ header {
   padding: 2rem;
   max-width: 1027px;
   align-self: center;
+}
+
+.loading {
+  width: 300px;
+  height: 300px;
 }
 
 main {

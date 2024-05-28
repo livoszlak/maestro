@@ -3,10 +3,10 @@ export default function Footer(): JSX.Element {
   return (
     <footer>
       <p>
-        "Hallå maestro!" -{" "}
+        &ldquo;Hallå maestro!&ldquo; -
         <a href="https://github.com/AntonBeYt/AntonBeYt">
           Anton Bernhardsson Yttring
-        </a>{" "}
+        </a>
         & <a href="https://github.com/livoszlak">Liv Oszlak</a>
       </p>
       <p>
