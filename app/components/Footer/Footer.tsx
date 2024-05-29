@@ -1,5 +1,7 @@
 "use client";
+
 import { Link, Typography } from "@mui/material";
+
 export default function Footer(): JSX.Element {
   return (
     <footer>
@@ -21,7 +23,7 @@ export default function Footer(): JSX.Element {
           variant="subtitle1"
           href="https://github.com/livoszlak"
         >
-          Liv Oszlak
+          Liv Oschlag
         </Link>
       </Typography>
       <Typography variant="overline">

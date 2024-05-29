@@ -91,7 +91,7 @@ export async function fetchCocktails(ingredient: string): Promise<Cocktail[]> {
     return [
       {
         id: "1",
-        name: "No drinks found on that ingredient",
+        name: "No drinks found with that ingredient. Maybe you've had enough.",
         image: "/spilled_drink.svg",
       },
     ];
@@ -108,9 +108,9 @@ export async function fetchCocktail(id: string): Promise<CocktailDetails> {
     return {
       id: "1",
       name: "No drink found with that id",
-      type: "no drink found",
-      glass: "",
-      instructions: "please try again",
+      type: "No drink found",
+      glass: "No glass for no drink",
+      instructions: "Please try again!",
       image: "/spilled_drink.svg",
       ingredients: [],
     };

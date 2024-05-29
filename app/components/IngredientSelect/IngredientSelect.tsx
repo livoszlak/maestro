@@ -1,4 +1,5 @@
 "use client";
+
 import {
   FormControl,
   InputLabel,
@@ -11,12 +12,12 @@ import { useState } from "react";
 import { ingredients } from "@/app/constants/constants";
 
 export default function IngredientSelect(): JSX.Element {
-  const pathname = usePathname();
+  const pathname: string = usePathname();
   const router = useRouter();
 
   const [ingredient, setIngredient] = useState<string>("");
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
+  const handleChange = (event: SelectChangeEvent<string>): void => {
     const selectedIngredient = event.target.value as string;
     setIngredient(selectedIngredient);
 
