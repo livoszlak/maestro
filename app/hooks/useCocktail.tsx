@@ -1,8 +1,7 @@
-"use client";
 import { useState, useEffect } from "react";
 import { fetchCocktail, CocktailDetails } from "../api/cocktailsApi";
 
-export const useCocktail = (id: string) => {
+export const useCocktail = (id: string): CocktailDetails | undefined => {
   const [cocktail, setCocktail] = useState<CocktailDetails>();
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 "use client";
+
 import { useCocktails } from "@/app/hooks/useCocktails";
 import { Box, Typography, styled } from "@mui/material";
 import CocktailCard from "../CocktailCard/CocktailCard";
@@ -20,21 +21,21 @@ function CocktailsDisplay(): JSX.Element {
   const ingredient = searchParams.get("ingredient") || "";
   const cocktails = useCocktails(ingredient);
 
-  if (!ingredient) {
+  /*   if (!ingredient) {
     return <h1>No ingredient provided</h1>;
-  }
+  } */
 
   if (cocktails === undefined) {
     return <Loading />;
   }
 
-  if (!cocktails) {
+  /*   if (!cocktails) {
     return (
       <Typography sx={{ textAlign: "center" }} variant="h4">
         Mixing cocktails...
       </Typography>
     );
-  }
+  } */
 
   return (
     <>

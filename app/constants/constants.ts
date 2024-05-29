@@ -3,6 +3,8 @@ type Ingredient = {
   name: string;
 };
 
+// Ingredient array for the select component on index, with API compliant keys that are passed to the fetch function.
+
 export const ingredients: Ingredient[] = [
   { apiKey: "Vodka", name: "Vodka" },
   { apiKey: "Gin", name: "Gin" },
