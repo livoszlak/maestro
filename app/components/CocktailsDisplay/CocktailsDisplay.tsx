@@ -21,21 +21,9 @@ function CocktailsDisplay(): JSX.Element {
   const ingredient = searchParams.get("ingredient") || "";
   const cocktails = useCocktails(ingredient);
 
-  /*   if (!ingredient) {
-    return <h1>No ingredient provided</h1>;
-  } */
-
   if (cocktails === undefined) {
     return <Loading />;
   }
-
-  /*   if (!cocktails) {
-    return (
-      <Typography sx={{ textAlign: "center" }} variant="h4">
-        Mixing cocktails...
-      </Typography>
-    );
-  } */
 
   return (
     <>
